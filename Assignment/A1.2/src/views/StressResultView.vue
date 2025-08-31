@@ -18,10 +18,7 @@ if (data) {
 
     <div v-if="totalScore !== null" class="alert alert-info">
       <div class="fw-bold">Total Score: {{ totalScore }} / 32</div>
-      <div>
-        Level: <span class="fw-semibold">{{ level }}</span>
-      </div>
+      <div class="fw-bold">Stress Level: {{ level }}</div>
     </div>
-    <div v-else class="alert alert-warning">No result yet.</div>
   </div>
 </template>
