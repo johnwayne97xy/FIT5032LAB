@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/Home.vue'
-import StressAssessment from '../views/StressAssessment.vue'
+import StressAssessment from '../views/StressAssessmentView.vue'
 import CommunityStories from '../views/CommunityStories.vue'
 import Resources from '../views/Resources.vue'
 import GetInvolved from '../views/GetInvolved.vue'
@@ -12,6 +12,12 @@ const routes = [
   { path: '/community-stories', name: 'CommunityStories', component: CommunityStories },
   { path: '/resources', name: 'Resources', component: Resources },
   { path: '/get-involved', name: 'GetInvolved', component: GetInvolved },
+  { path: '/register', name: 'register', component: () => import('../views/Register.vue') },
+  {
+    path: '/stress-assessment/result',
+    name: 'stressResult',
+    component: () => import('../views/StressResultView.vue'),
+  },
 ]
 
 const router = createRouter({

@@ -31,6 +31,7 @@
             Register
           </router-link>
         </li>
+        <li class="nav-item"></li>
       </ul>
     </header>
   </div>
