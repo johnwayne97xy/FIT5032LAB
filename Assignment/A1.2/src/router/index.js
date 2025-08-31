@@ -5,6 +5,8 @@ import StressAssessment from '../views/StressAssessmentView.vue'
 import CommunityStories from '../views/CommunityStories.vue'
 import Resources from '../views/Resources.vue'
 import GetInvolved from '../views/GetInvolved.vue'
+import Register from '../views/Register.vue'
+import StressResult from '../views/StressResultView.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
@@ -12,12 +14,8 @@ const routes = [
   { path: '/community-stories', name: 'CommunityStories', component: CommunityStories },
   { path: '/resources', name: 'Resources', component: Resources },
   { path: '/get-involved', name: 'GetInvolved', component: GetInvolved },
-  { path: '/register', name: 'register', component: () => import('../views/Register.vue') },
-  {
-    path: '/stress-assessment/result',
-    name: 'stressResult',
-    component: () => import('../views/StressResultView.vue'),
-  },
+  { path: '/register', name: 'Register', component: Register },
+  { path: '/stress-assessment/result', name: 'StressResult', component: StressResult },
 ]
 
 const router = createRouter({

@@ -1,6 +1,4 @@
-<script setup>
-// 不需要额外逻辑，全部用 <router-link> 导航即可
-</script>
+<script setup></script>
 
 <template>
   <div class="container py-4">

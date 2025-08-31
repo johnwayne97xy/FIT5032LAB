@@ -130,7 +130,6 @@ const clearForm = () => {
       <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
         <div class="header-band text-center text-white rounded-top-3 py-3">
           <h1 class="m-0">User Registration</h1>
-          <p class="m-0 small">Create your account with email verification and a secure password</p>
         </div>
 
         <div class="form-card p-4 rounded-bottom-3">
@@ -258,8 +257,10 @@ const clearForm = () => {
             </div>
 
             <div class="text-center">
-              <button type="submit" class="btn btn-dark me-2">Submit</button>
-              <button type="button" class="btn btn-outline-dark" @click="clearForm">Clear</button>
+              <button type="submit" class="btn btn-primary me-2">Submit</button>
+              <button type="button" class="btn btn-outline-primary" @click="clearForm">
+                Clear
+              </button>
             </div>
           </form>
         </div>

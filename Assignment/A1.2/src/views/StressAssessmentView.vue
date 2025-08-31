@@ -35,13 +35,6 @@ function prev() {
 }
 
 function submit() {
-  for (const q of questions) {
-    if (!answers.value[q.key]) {
-      error.value = 'Please answer all questions.'
-      return
-    }
-  }
-
   let totalScore = 0
   for (const q of questions) totalScore += scoreMap[answers.value[q.key]]
 
@@ -50,15 +43,7 @@ function submit() {
   if (totalScore >= 17 && totalScore <= 24) level = 'High'
   if (totalScore >= 25) level = 'Very High'
 
-  const key = 'stressHistory'
-  const history = JSON.parse(localStorage.getItem(key) || '[]')
-  history.push({
-    id: Date.now(),
-    timestamp: new Date().toISOString(),
-    totalScore,
-    level,
-  })
-  localStorage.setItem(key, JSON.stringify(history))
+  localStorage.setItem('lastResult', JSON.stringify({ totalScore, level }))
 
   router.push('/stress-assessment/result')
 }
