@@ -1,0 +1,22 @@
+import { createRouter, createWebHistory } from 'vue-router'
+
+import Home from '../views/Home.vue'
+import StressAssessment from '../views/StressAssessment.vue'
+import CommunityStories from '../views/CommunityStories.vue'
+import Resources from '../views/Resources.vue'
+import GetInvolved from '../views/GetInvolved.vue'
+
+const routes = [
+  { path: '/', name: 'Home', component: Home },
+  { path: '/stress-assessment', name: 'StressAssessment', component: StressAssessment },
+  { path: '/community-stories', name: 'CommunityStories', component: CommunityStories },
+  { path: '/resources', name: 'Resources', component: Resources },
+  { path: '/get-involved', name: 'GetInvolved', component: GetInvolved },
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
+
+export default router
