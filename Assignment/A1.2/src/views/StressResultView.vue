@@ -1,17 +1,15 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 const totalScore = ref(null)
 const level = ref('')
 
-onMounted(() => {
-  const data = localStorage.getItem('lastResult')
-  if (data) {
-    const result = JSON.parse(data)
-    totalScore.value = result.totalScore
-    level.value = result.level
-  }
-})
+const data = localStorage.getItem('lastResult')
+if (data) {
+  const result = JSON.parse(data)
+  totalScore.value = result.totalScore
+  level.value = result.level
+}
 </script>
 
 <template>
@@ -24,6 +22,6 @@ onMounted(() => {
         Level: <span class="fw-semibold">{{ level }}</span>
       </div>
     </div>
-    <div v-else class="alert alert-warning">No result yet. Please take the assessment first.</div>
+    <div v-else class="alert alert-warning">No result yet.</div>
   </div>
 </template>
