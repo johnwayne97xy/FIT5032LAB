@@ -429,7 +429,7 @@ function navigateToShareStory() {
 
       <!-- Community Support Section -->
       <section class="information-card community-support-card" v-if="userTotalScore < 60">
-        <div class="card-icon">🤝</div>
+
         <h3>You're Not Alone</h3>
         <p>
           Feeling stressed? Share your story with our supportive community or read how others
@@ -442,7 +442,7 @@ function navigateToShareStory() {
 
       <!-- Find Help Section -->
       <section class="information-card">
-        <div class="card-icon">📍</div>
+
         <h3>Find Support Near You</h3>
         <p>
           Professional help is available in your area. Mental health clinics and counseling services
@@ -455,7 +455,7 @@ function navigateToShareStory() {
 
       <!-- Important Information -->
       <section class="information-card">
-        <div class="card-icon">ℹ️</div>
+
         <h3>Important to Remember</h3>
         <p>
           <strong>1 in 5 people</strong> experience mental health challenges each year.
@@ -466,7 +466,7 @@ function navigateToShareStory() {
 
       <!-- Action Steps -->
       <section class="information-card">
-        <div class="card-icon">💪</div>
+
         <h3>Steps You Can Take Today</h3>
         <ul class="action-steps-list">
           <li>
@@ -490,7 +490,7 @@ function navigateToShareStory() {
 
       <!-- Professional Support -->
       <section class="information-card professional-support-card">
-        <div class="card-icon">🎯</div>
+
         <h3>Professional Support Options</h3>
         <div class="support-options-list">
           <div class="support-option-item">
@@ -757,7 +757,7 @@ function navigateToShareStory() {
 
 /* Score explanation legend */
 .score-explanation-legend {
-  background: #f9fafb;
+  background: #ffffff;
   border-radius: 12px;
   padding: 20px;
   text-align: left;
@@ -806,20 +806,20 @@ function navigateToShareStory() {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-/* Main message card with white text */
+/* Main message card - plain white box */
 .main-message-card {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-  color: white;
+  background: #ffffff;
+  color: #1f2937;
 }
 
 .main-message-card h2 {
-  color: white;
+  color: #059669;
   margin-bottom: 15px;
   font-size: 1.6rem;
 }
 
 .main-message-card p {
-  color: white;
+  color: #4b5563;
   font-size: 1.05rem;
   line-height: 1.7;
 }
@@ -827,7 +827,7 @@ function navigateToShareStory() {
 /* Community support card */
 .community-support-card {
   border: 2px solid #f59e0b;
-  background: #fffbeb;
+  background: #ffffff;
 }
 
 /* Card icon */
@@ -926,7 +926,7 @@ function navigateToShareStory() {
 
 .support-option-item {
   padding: 10px;
-  background: #f0fdf4;
+  background: #ffffff;
   border-radius: 8px;
 }
 
