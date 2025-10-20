@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { auth, db } from '@/services/firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { doc, getDoc } from 'firebase/firestore'
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 import Swal from 'sweetalert2'
 
 const router = useRouter()
@@ -96,6 +96,42 @@ const submitLogin = async () => {
     })
   }
 }
+
+// Sign in with Google
+async function loginWithGoogle() {
+  try {
+    const provider = new GoogleAuthProvider()
+    const cred = await signInWithPopup(auth, provider)
+
+    // Ensure a user doc exists (very simple default fields)
+    const userRef = doc(db, 'users', cred.user.uid)
+    const snap = await getDoc(userRef)
+    if (!snap.exists()) {
+      await setDoc(userRef, {
+        username: cred.user.displayName || (cred.user.email?.split('@')[0] || 'User'),
+        email: cred.user.email || '',
+        identity: '',
+        gender: '',
+        isAustralian: false,
+        suburb: '',
+        role: 'user',
+        createdAt: new Date()
+      })
+    }
+
+    // If user is admin, go to admin page; otherwise home
+    const finalSnap = await getDoc(userRef)
+    const data = finalSnap.data() || {}
+    if (data.role === 'admin') {
+      router.push('/admin')
+    } else {
+      router.push('/')
+    }
+  } catch (err) {
+    console.error(err)
+    alert('Google sign-in failed. Please try again.')
+  }
+}
 </script>
 
 
@@ -146,6 +182,9 @@ const submitLogin = async () => {
               <button type="button" class="btn btn-outline-primary" @click="clearLoginForm">
                 Clear
               </button>
+              <div class="mt-3">
+                <button type="button" class="btn btn-danger" @click="loginWithGoogle">Sign in with Google</button>
+              </div>
             </div>
           </form>
         </div>
