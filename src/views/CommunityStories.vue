@@ -146,6 +146,18 @@
         </div>
       </div>
     </div>
+
+    <!-- Simple Tags Pie Chart with basic layout -->
+    <section class="stats-section">
+      <div class="stats-header">
+        <h2>Community Insights</h2>
+        <p class="data-source-text">Tag distribution from recent stories</p>
+      </div>
+      <div class="stats-card">
+        <h3 class="stats-title">Tags Overview</h3>
+        <canvas id="storiesTagsPie" width="320" height="320"></canvas>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -332,7 +344,56 @@ const formatStoryDate = (date) => {
 }
 
 // Load stories when component mounts
-onMounted(loadAllStories)
+onMounted(async () => {
+  await loadAllStories()
+  loadChartJsAndRender()
+})
+
+// Load Chart.js and render small pie chart
+function loadChartJsAndRender() {
+  const exists = document.querySelector('script[src^="https://cdn.jsdelivr.net/npm/chart.js"]')
+  if (exists) {
+    renderStoriesTagsPie()
+    return
+  }
+  const s = document.createElement('script')
+  s.src = 'https://cdn.jsdelivr.net/npm/chart.js'
+  s.onload = renderStoriesTagsPie
+  document.body.appendChild(s)
+}
+
+async function renderStoriesTagsPie() {
+  try {
+    const snap = await getDocs(collection(db, 'communityStories'))
+    const tagToCount = {}
+    snap.forEach(d => {
+      const data = d.data() || {}
+      const tags = Array.isArray(data.tags) ? data.tags : []
+      tags.forEach(t => {
+        const key = (typeof t === 'string' ? t : String(t)).trim()
+        if (!key) return
+        tagToCount[key] = (tagToCount[key] || 0) + 1
+      })
+    })
+
+    const labels = Object.keys(tagToCount)
+    const values = labels.map(l => tagToCount[l])
+    const canvas = document.getElementById('storiesTagsPie')
+    if (!canvas || labels.length === 0) return
+
+    const colors = ['#10b981','#3b82f6','#f59e0b','#ef4444','#8b5cf6','#14b8a6']
+    const bg = labels.map((_, i) => colors[i % colors.length])
+
+    // eslint-disable-next-line no-undef
+    new Chart(canvas, {
+      type: 'pie',
+      data: { labels, datasets: [{ data: values, backgroundColor: bg }] },
+      options: { plugins: { legend: { position: 'bottom' }, tooltip: { enabled: true } } }
+    })
+  } catch (e) {
+    // silent
+  }
+}
 </script>
 
 <style scoped>
@@ -622,6 +683,12 @@ onMounted(loadAllStories)
   background: #10b981;
   color: white;
 }
+
+/* Simple stats layout */
+.stats-section { margin-top: 32px; }
+.stats-header { text-align: center; margin-bottom: 12px; }
+.stats-card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; max-width: 520px; margin: 0 auto; }
+.stats-title { margin: 0 0 8px 0; color: #1f2937; font-size: 1.1rem; }
 
 /* Responsive design */
 @media (max-width: 768px) {
